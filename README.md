@@ -25,3 +25,5 @@ PS:
 * 愿意自己动手的同学，可以用v0_my源码，写死学号密码自行编译打包自己专属exe，无需.txt即可实现和FDU-net_IDtxt.exe相同功能，更优雅?
 
 代码已开源，可以自己改着玩，./score_code
+
+contributors: GSY, GPX
