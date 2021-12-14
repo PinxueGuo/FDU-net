@@ -26,4 +26,4 @@ PS:
 
 代码已开源，可以自己改着玩，./score_code
 
-contributors: GSY, GPX
+Contributors: GSY, GPX
