@@ -3,9 +3,12 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
 import requests
+import ctypes
 
 username_str = '21110010001'
 password_str = 'FDU123456'
+
+whnd = ctypes.windll.kernel32.GetConsoleWindow()
 
 class Login:
     def login(self):
@@ -22,12 +25,8 @@ class Login:
             login_button = driver.find_element_by_id('button')
 
             username_input.send_keys(username_str)
-            # time.sleep(1)
             password_input.send_keys(password_str)
-            # time.sleep(1)
             login_button.click()
-            # time.sleep(1)
-            # print('-----')
         except:
             print(self.getCurrentTime(), u"登陆函数异常")
         finally:
@@ -56,7 +55,7 @@ class Login:
 
     #主函数
     def main(self):
-        print (self.getCurrentTime(), u"Hi，SEU自动登陆脚本正在运行")
+        print (self.getCurrentTime(), u"Hi，FDU-net自动登陆脚本正在运行")
         while True:
             can_connect = self.canConnect()
             if not can_connect:
@@ -68,11 +67,19 @@ class Login:
                 finally:
                     time.sleep(1)
                     if self.canConnect():
-                        print(self.getCurrentTime(), u"重新登陆成功")
+                        print(self.getCurrentTime(), u"重新登陆成功! 将在后台运行，保证网络断开时重连。")
+                        time.sleep(2)
+                        if whnd != 0:
+                            ctypes.windll.user32.ShowWindow(whnd, 0)
+                            ctypes.windll.kernel32.CloseHandle(whnd)
                     else:
                         print(self.getCurrentTime(), u"登陆失败，再来一次")
             else:
-                print (self.getCurrentTime(), u"一切正常...")
+                print (self.getCurrentTime(), u"宁已连接网络... 将在后台运行，保证网络断开时重连。")
+                time.sleep(2)
+                if whnd != 0:
+                    ctypes.windll.user32.ShowWindow(whnd, 0)
+                    ctypes.windll.kernel32.CloseHandle(whnd)
                 time.sleep(10)
             time.sleep(1)
 
